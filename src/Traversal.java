@@ -10,17 +10,21 @@ public class Traversal {
     root.right.right = new TreeNode(5);
     root.right.right.right = new TreeNode(22);
     
-    System.out.println("Preorder");
-    printPreorder(root);
+    // System.out.println("Preorder");
+    // printPreorder(root);
 
-    System.out.println(" ");
+    // System.out.println(" ");
 
-    System.out.println("Postorder");
-    printPostorder(root);
+    // System.out.println("Postorder");
+    // printPostorder(root);
 
-    System.out.println(" ");
-    System.out.println("Inorder");
-    printInorder(root);
+    // System.out.println(" ");
+    // System.out.println("Inorder");
+    // printInorder(root);
+
+    // printUnderTreshold(root, 7);
+
+    System.out.println(countNodes(root));
   }
 
   public static void printPreorder(TreeNode current) {
@@ -46,5 +50,32 @@ public class Traversal {
     printInorder(current.left);
     System.out.print(current.value + " ");
     printInorder(current.right);
+  }
+
+  /*
+  Print the values of the nodes in the tree that are strictly less than the treshold
+  Nodes should be printed pre-order
+  */
+  public static void printUnderTreshold(TreeNode current, int treshold) {
+    if (current == null) return;
+
+    if (current.value < treshold) {
+      System.out.print(current.value + " ");
+    }
+    printUnderTreshold(current.left, treshold);
+    printUnderTreshold(current.right, treshold);
+  }
+
+
+/*
+Return the count of how many nodes are in the tree
+*/
+  public static int countNodes(TreeNode current) {
+    if (current == null) return 0;
+
+    int leftSubtreeCount = countNodes(current.left);
+    int rightSubtreeCount = countNodes(current.right);
+    int totalCount = leftSubtreeCount + rightSubtreeCount + 1;
+    return totalCount;
   }
 }
